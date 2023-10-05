@@ -19,10 +19,15 @@ public class PlayerBehavour : MonoBehaviour
 
     GameController _gameController;
 
+    GameObject _bullet;
+
+    int count = 0;
+
         // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
+        _bullet = Resources.Load<GameObject>("Prefabs/Bullet");
 
         _isMobilePlatform = Application.platform == RuntimePlatform.Android ||
                             Application.platform == RuntimePlatform.IPhonePlayer;
@@ -40,7 +45,23 @@ public class PlayerBehavour : MonoBehaviour
         
         Move();
         CheckBoundries();
+
+
  
+    }
+
+    private void FixedUpdate()
+    {
+        if(count > 10)
+        {
+            GameObject bullet = Instantiate(_bullet);
+            bullet.transform.position = transform.position;
+            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
+
+            count = 0;
+        }
+
+        count++;
     }
 
     void GetTouchScreenInput()

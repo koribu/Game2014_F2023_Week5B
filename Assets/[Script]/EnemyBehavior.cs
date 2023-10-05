@@ -22,6 +22,10 @@ public class EnemyBehavior : MonoBehaviour
     float _dyingCounter = 0;
     float _timer = 2;
 
+    GameObject _bullet;
+
+    int count = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,8 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _bullet = Resources.Load<GameObject>("Prefabs/Bullet");
+
         transform.position = new Vector2( Mathf.PingPong(_horizontalSpeed * Time.time,_horizontalBoundries.max - _horizontalBoundries.min) + _horizontalBoundries.min
             , transform.position.y - _verticalSpeed * Time.deltaTime);
 
@@ -60,6 +66,21 @@ public class EnemyBehavior : MonoBehaviour
         }
 
     }
+
+    private void FixedUpdate()
+    {
+        if (count > 10)
+        {
+            GameObject bullet = Instantiate(_bullet);
+            bullet.transform.position = transform.position;
+            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.down);
+
+            count = 0;
+        }
+
+        count++;
+    }
+
 
     void Reset()
     {
