@@ -12,10 +12,12 @@ public class BulletBehavior : MonoBehaviour
     Boundries _boundries;
 
     Vector3 _direction;
+
+    BulletManager _manager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _manager = FindAnyObjectByType<BulletManager>();
     }
 
     // Update is called once per frame
@@ -23,8 +25,8 @@ public class BulletBehavior : MonoBehaviour
     {
         transform.position += _direction * _speed * Time.deltaTime;
 
-        if(transform.position.y > _boundries.max || transform.position.y < _boundries.min)
-            Destroy(gameObject);
+        if (transform.position.y > _boundries.max || transform.position.y < _boundries.min)
+            _manager.ReturnBullet(gameObject);
     }
 
     public void SetDirection(Vector3 dir)

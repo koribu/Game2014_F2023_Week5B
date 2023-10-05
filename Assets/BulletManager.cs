@@ -46,4 +46,10 @@ public class BulletManager : MonoBehaviour
         bullet.SetActive(true);
         return bullet;
     }
+
+    public void ReturnBullet(GameObject bullet)
+    {
+        bullet.SetActive(false);
+        _bulletPool.Enqueue(bullet);
+    }
 }

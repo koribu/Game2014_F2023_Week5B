@@ -18,6 +18,7 @@ public class PlayerBehavour : MonoBehaviour
     bool _isMobilePlatform = false;
 
     GameController _gameController;
+    BulletManager _bulletManager;
 
     GameObject _bullet;
 
@@ -33,6 +34,7 @@ public class PlayerBehavour : MonoBehaviour
                             Application.platform == RuntimePlatform.IPhonePlayer;
 
         _gameController = FindObjectOfType<GameController>();
+        _bulletManager = FindObjectOfType<BulletManager>();
     }
 
     // Update is called once per frame
@@ -52,12 +54,16 @@ public class PlayerBehavour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(count > 1)
+        if(count > 10)
         {
-          /*  GameObject bullet = Instantiate(_bullet);
+            /*  GameObject bullet = Instantiate(_bullet);
+              bullet.transform.position = transform.position;
+              bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
+  */
+            GameObject bullet = _bulletManager.GetBullet();
             bullet.transform.position = transform.position;
             bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
-*/
+
             count = 0;
         }
 

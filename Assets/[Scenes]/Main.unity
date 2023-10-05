@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254323e19bd4a3944bc836ee0c0f69f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletTotal: 50
+  _bulletTotal: 15
 --- !u!4 &1025538338
 Transform:
   m_ObjectHideFlags: 0
