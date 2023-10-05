@@ -57,7 +57,7 @@ public class PlayerBehavour : MonoBehaviour
         if(count > 10)
         {
   
-            _bulletManager.GetBullet(transform.position,Vector3.up,Color.green,Vector3.zero);
+            _bulletManager.GetBullet(transform.position,Vector3.up,Color.green,Vector3.zero, "PlayerBullet");
 
             count = 0;
         }
@@ -117,10 +117,10 @@ public class PlayerBehavour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy"))
+        if(collision.CompareTag("EnemyBullet"))
         {
-            _gameController.ChangeScore(7);
-            collision.gameObject.GetComponent<EnemyBehavior>().DyingSequence();
+            _gameController.ChangeScore(-7);
+           // collision.gameObject.GetComponent<EnemyBehavior>().DyingSequence();
             Debug.Log("I Got HIT!!!");
         }
     }

@@ -27,11 +27,15 @@ public class EnemyBehavior : MonoBehaviour
     int count = 0;
 
     BulletManager _bulletManager;
+    GameController _gameController;
+
+    int _heath = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         _bulletManager = FindAnyObjectByType<BulletManager>();
+        _gameController = FindAnyObjectByType<GameController>();
         _defaultSize = transform.localScale;
         Reset();
         
@@ -75,11 +79,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (count > 10)
         {
-            /*GameObject bullet = Instantiate(_bullet);
-            bullet.transform.position = transform.position;
-            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.down);
-*/
-            _bulletManager.GetBullet(transform.position,Vector3.down,Color.magenta,new Vector3(0,0,180));
+            _bulletManager.GetBullet(transform.position,Vector3.down,Color.magenta,new Vector3(0,0,180), "EnemyBullet");
             
             count = 0;
         }
@@ -106,5 +106,21 @@ public class EnemyBehavior : MonoBehaviour
     public void DyingSequence()
     {
         _isDying = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("PlayerBullet"))
+        {
+
+            Debug.Log("Enemy got hit");
+            _gameController.ChangeScore(7);
+
+            _heath--;
+            if(_heath<0)
+            {
+                DyingSequence();
+            }
+        }
     }
 }

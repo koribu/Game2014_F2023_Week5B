@@ -40,7 +40,7 @@ public class BulletManager : MonoBehaviour
 
     }
 
-    public GameObject GetBullet(Vector3 pos, Vector3 dir, Color col, Vector3 rotation)
+    public GameObject GetBullet(Vector3 pos, Vector3 dir, Color col, Vector3 rotation, string tagName)
     {
         if(_bulletPool.Count <=1 )
             CreateBullet();
@@ -50,7 +50,7 @@ public class BulletManager : MonoBehaviour
 
         bullet.transform.localEulerAngles = rotation;
 
-        
+        bullet.tag = tagName;
 
         bullet.transform.position = pos;
         bullet.GetComponent<BulletBehavior>().SetDirection(dir);
