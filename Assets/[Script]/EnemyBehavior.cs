@@ -26,9 +26,12 @@ public class EnemyBehavior : MonoBehaviour
 
     int count = 0;
 
+    BulletManager _bulletManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        _bulletManager = FindAnyObjectByType<BulletManager>();
         _defaultSize = transform.localScale;
         Reset();
         
@@ -38,6 +41,7 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
         _bullet = Resources.Load<GameObject>("Prefabs/Bullet");
+       
 
         transform.position = new Vector2( Mathf.PingPong(_horizontalSpeed * Time.time,_horizontalBoundries.max - _horizontalBoundries.min) + _horizontalBoundries.min
             , transform.position.y - _verticalSpeed * Time.deltaTime);
@@ -69,12 +73,14 @@ public class EnemyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (count > 1)
+        if (count > 10)
         {
             /*GameObject bullet = Instantiate(_bullet);
             bullet.transform.position = transform.position;
             bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.down);
 */
+            _bulletManager.GetBullet(transform.position,Vector3.down,Color.magenta,new Vector3(0,0,180));
+            
             count = 0;
         }
 

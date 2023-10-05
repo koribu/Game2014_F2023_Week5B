@@ -56,13 +56,8 @@ public class PlayerBehavour : MonoBehaviour
     {
         if(count > 10)
         {
-            /*  GameObject bullet = Instantiate(_bullet);
-              bullet.transform.position = transform.position;
-              bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
-  */
-            GameObject bullet = _bulletManager.GetBullet();
-            bullet.transform.position = transform.position;
-            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
+  
+            _bulletManager.GetBullet(transform.position,Vector3.up,Color.green,Vector3.zero);
 
             count = 0;
         }

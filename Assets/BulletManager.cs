@@ -40,9 +40,22 @@ public class BulletManager : MonoBehaviour
 
     }
 
-    public GameObject GetBullet()
+    public GameObject GetBullet(Vector3 pos, Vector3 dir, Color col, Vector3 rotation)
     {
+        if(_bulletPool.Count <=1 )
+            CreateBullet();
+
         GameObject bullet = _bulletPool.Dequeue();
+
+
+        bullet.transform.localEulerAngles = rotation;
+
+        
+
+        bullet.transform.position = pos;
+        bullet.GetComponent<BulletBehavior>().SetDirection(dir);
+        bullet.GetComponent<SpriteRenderer>().color = col;
+        
         bullet.SetActive(true);
         return bullet;
     }
