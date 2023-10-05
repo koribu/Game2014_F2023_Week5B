@@ -120,6 +120,7 @@ public class PlayerBehavour : MonoBehaviour
         if(collision.CompareTag("EnemyBullet"))
         {
             _gameController.ChangeScore(-7);
+            _bulletManager.ReturnBullet(collision.gameObject);
            // collision.gameObject.GetComponent<EnemyBehavior>().DyingSequence();
             Debug.Log("I Got HIT!!!");
         }

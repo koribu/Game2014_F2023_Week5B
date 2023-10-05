@@ -116,6 +116,8 @@ public class EnemyBehavior : MonoBehaviour
             Debug.Log("Enemy got hit");
             _gameController.ChangeScore(7);
 
+            _bulletManager.ReturnBullet(collision.gameObject);
+
             _heath--;
             if(_heath<0)
             {
