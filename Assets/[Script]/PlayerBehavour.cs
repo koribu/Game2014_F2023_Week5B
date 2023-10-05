@@ -52,12 +52,12 @@ public class PlayerBehavour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(count > 10)
+        if(count > 1)
         {
-            GameObject bullet = Instantiate(_bullet);
+          /*  GameObject bullet = Instantiate(_bullet);
             bullet.transform.position = transform.position;
             bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
-
+*/
             count = 0;
         }
 
